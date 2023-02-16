@@ -23,6 +23,7 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
         fin += page_size
     return (debut, fin)
 
+
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -64,7 +65,6 @@ class Server:
             return []
 
         return dataset[start:end]
-
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """
