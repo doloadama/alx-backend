@@ -23,7 +23,6 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
         fin += page_size
     return (debut, fin)
 
-
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -82,13 +81,13 @@ class Server:
         """
         dataset = self.dataset()
         total_pages = len(self.dataset()) // page_size + 1
-        data =self.get_page(page, page_size)
+        data = self.get_page(page, page_size)
         informations = {
             "page_size": page_size if page_size <= len(data) else len(data),
             "page": page,
             "data": data,
             "next_page": page + 1 if page + 1 <= total_pages else None,
             "prev_page": page - 1 if page > 1 else None,
-            "total_pages": total_pages
+            "total_pages": total_pages,
         }
         return informations
