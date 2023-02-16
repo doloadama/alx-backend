@@ -56,8 +56,8 @@ class Server:
         If the input arguments are out of range for the dataset,
         an empty list should be returned.
         """
-        assert isinstance(page, int) and page > 0, "Page must be a positive integer"
-        assert isinstance(page_size, int) and page_size > 0, "Page size must be a positive integer"
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
         start, end = index_range(page, page_size)
         dataset = self.dataset()
         if start >= len(dataset):
