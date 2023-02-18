@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"name": "alx-backend-storage",
+			"path": "../../alx-backend-storage"
+		},
+		{
+			"name": "alx-backend-python",
+			"path": "../../alx-backend-python"
+		},
+		{
+			"name": "alx-interview",
+			"path": "../../alx-interview"
+		},
+		{
+			"name": "alx-backend-javascript",
+			"path": "../../alx-backend-javascript"
+		},
+		{
+			"name": "alx-backend",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
