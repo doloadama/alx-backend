@@ -46,6 +46,6 @@ class MRUCache(BaseCaching):
         self.cache_data linked to key.
         """
         if key in self.cache_data:
-            self.mru_order.move_to_end(key, False)
+            self.mru.move_to_end(key, False)
             return self.cache_data[key]
         return None
