@@ -28,7 +28,7 @@ class MRUCache(BaseCaching):
             return
 
         self.cache_data[key] = item
-        self.mru_order[key] = item
+        self.mru[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             discarded = next(iter(self.mru))
