@@ -2,7 +2,7 @@
 """
 0. Basic dictionary
 """
-import BaseCaching
+from base_caching import  BaseCaching
 
 
 class BasicCache(BaseCaching):
@@ -20,14 +20,14 @@ class BasicCache(BaseCaching):
         """
         Assign to the dictionary <self.cache_data> the item value
         for the key <key>
-        if <key> or <item> is None, this method should not not 
+        if <key> or <item> is None, this method should not not
         anything
         """
         if key is None or item is None:
             pass
         else:
             self.cache_data[key] = item
-    
+
     def get(self, key):
         """
         return the value in <self.cache_data> linked to <key>
