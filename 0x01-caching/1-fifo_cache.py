@@ -17,7 +17,7 @@ class FIFOCache(BaseCaching):
         call the parent init
         """
         super().__init__()
-        self.cache_data = OrderedDict()
+        self.ordre = []
 
     def put(self, key, item):
         """
@@ -29,6 +29,7 @@ class FIFOCache(BaseCaching):
         """
         if key is None or item is None:
             pass
+        self.cache_data[key] = item 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             self.cache_data.pop[0]
             print("DISCARD:", self.cache_data(0))
