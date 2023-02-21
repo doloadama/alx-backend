@@ -40,9 +40,9 @@ class LIFOCache(BaseCaching):
             self.ordre.append(key)
 
     def get(self, key):
-        """ 
+        """
         return the value in <self.cache_data> linked to <key>
         if <key> is  None or if the <key> doesn't exist in <sel.cache_data>
         """
         if key and key in self.cache_data.keys():
-            return self.cache_data[key] 
+            return self.cache_data[key]
