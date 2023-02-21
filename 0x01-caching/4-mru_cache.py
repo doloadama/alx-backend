@@ -35,7 +35,7 @@ class MRUCache(BaseCaching):
                 print("DISCARD:", mru)
             self.cache_data[key] = item
         else:
-            self.cache_data[key] =  item
+            self.cache_data[key] = item
 
     def get(self, key):
         """Retrieves an item by key"""
