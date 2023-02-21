@@ -17,7 +17,7 @@ class MRUCache(BaseCaching):
     """
     def __init__(self):
         super().__init__()
-        self.mru_order = OrderedDict()
+        self.mru = OrderedDict()
 
     def put(self, key, item):
         """
@@ -31,14 +31,14 @@ class MRUCache(BaseCaching):
         self.mru_order[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            item_discarded = next(iter(self.mru_order))
-            del self.cache_data[item_discarded]
-            print("DISCARD:", item_discarded)
+            discarded = next(iter(self.mru))
+            del self.cache_data[discarded]
+            print("DISCARD:", discarded)
 
-        if len(self.mru_order) > BaseCaching.MAX_ITEMS:
-            self.mru_order.popitem(last=False)
+        if len(self.mru) > BaseCaching.MAX_ITEMS:
+            self.mru.popitem(last=False)
 
-        self.mru_order.move_to_end(key, False)
+        self.mru.move_to_end(key, False)
 
     def get(self, key):
         """
