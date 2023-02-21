@@ -34,7 +34,7 @@ class BasicCache(BaseCaching):
         if <key> is None or if the <key> doesn't exist in <sel.cache_data>
         return None
         """
-        if key is None and key in self.cache_data.keys():
+        if key is None and key not in self.cache_data.keys():
             return None
         else:
             return self.cache_data[key]
