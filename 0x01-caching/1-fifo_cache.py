@@ -29,13 +29,14 @@ class FIFOCache(BaseCaching):
         """
         if key is None or item is None:
             pass
-        self.cache_data[key] = item
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            discarded = self.ordre.pop(0)
-            del self.cache_data[discarded]
-            print("DISCARD:", discarded)
-        self.cache_data[key] = item
-        self.ordre.append(key)
+        else:
+            length = len(self.cache_data)
+            if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+                print("DISCARD: {}".format(self.ordre[0]))
+                del self.cache_data[self.ordre[0]]
+                del self.order[0]
+            self.ordre.append(key)
+            self.cache_data[key] = item
 
     def get(self, key):
         """
