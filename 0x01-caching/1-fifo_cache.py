@@ -34,7 +34,7 @@ class FIFOCache(BaseCaching):
             if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
                 print("DISCARD: {}".format(self.ordre[0]))
                 del self.cache_data[self.ordre[0]]
-                del self.order[0]
+                del self.ordre[0]
             self.ordre.append(key)
             self.cache_data[key] = item
 
