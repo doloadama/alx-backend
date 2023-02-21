@@ -34,7 +34,7 @@ class FIFOCache(BaseCaching):
             discarded = self.ordre.pop(0)
             del self.cache_data[ordre]
         self.cache_data[key] =  item
-        self.indexed.append(key)
+        self.ordre.append(key)
 
     def get(self, key):
         """
