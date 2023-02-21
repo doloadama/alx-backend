@@ -16,7 +16,7 @@ class MRUCache(BaseCaching):
         Initialize the parent init method
         """
         super().__init__()
-        self.cache_data = OrderedDict()
+        self.mru = OrderedDict()
 
     def put(self, key, item):
         """
@@ -27,15 +27,20 @@ class MRUCache(BaseCaching):
         <BaseCaching.Max_ITEMS>
         DISCARD the last item
         """
-        if key is None or item is None:
+        if not key or not item:
             return
-        if key not in self.cache_data:
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                mru, _ = self.cache_data.popitem(False)
-                print("DISCARD:", mru)
-            self.cache_data[key] = item
-        else:
-            self.cache_data[key] = item
+
+        self.cache_data[key] = item
+        self.mru[key] = item
+
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            discarded = next(iter(self.mru))
+            del self.cache_data[discarded]
+            print("DISCARD:", discarded)
+
+        if len(self.mru) > BaseCaching.MAX_ITEMS:
+            self.mru.popitem(last=False)
+        self.mru.move_to_end(key, False)
 
     def get(self, key):
         """Retrieves an item by key"""
