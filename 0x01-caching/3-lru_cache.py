@@ -5,6 +5,7 @@
 from base_caching import BaseCaching
 from collections import OrderedDict
 
+
 class LRUCache(BaseCaching):
     """
     class caching system
@@ -29,7 +30,7 @@ class LRUCache(BaseCaching):
         if key and item:
             self.lru[key] = item
             self.lru.move_to_end(key)
-            self.cache_data[key] =  item
+            self.cache_data[key] =item
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             discarded = next(iter(self.lru))
             del self.cache_data[discarded]
