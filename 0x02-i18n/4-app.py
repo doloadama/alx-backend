@@ -24,7 +24,7 @@ def get_locale():
      determine the best match with our supported languages.
     """
     loc = request.args.get('locale')
-    if loc in app.config['LANGUAGES']:
+    if loc:
         return loc
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
@@ -34,7 +34,7 @@ babel.init_app(app, locale_selector=get_locale)
 
 @app.route("/", strict_slashes=False)
 def index() -> str:
-    return render_template("3-index.html")
+    return render_template("4-index.html")
 
 
 if __name__ == '__main__':
