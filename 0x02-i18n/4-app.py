@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """3.Parametrize templates"""
 from flask import Flask,  render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel
 import babel
+
+
+app = Flask(__name__)
+babel = Babel(app)
 
 
 class Config:
@@ -14,8 +18,6 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
-app = Flask(__name__)
-babel = Babel(app)
 app.config.from_object(Config)
 
 
