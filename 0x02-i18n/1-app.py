@@ -4,15 +4,6 @@ from flask import Flask, render_template
 from flask_babel import Babel
 
 
-
-@app.route("/", strict_slashes=False)
-def index():
-    """
-    HANDLES / ROUTE
-    """
-    return render_template("1-index.html")
-
-
 class Config(object):
     """
     Config class
@@ -25,6 +16,14 @@ class Config(object):
 app = Flask(__name__)
 app.config.from_object(Config)
 Babel = Babel(app)
+
+
+@app.route("/", strict_slashes=False)
+def index():
+    """
+    HANDLES / ROUTE
+    """
+    return render_template("1-index.html")
 
 
 if __name__ == '__main__':
