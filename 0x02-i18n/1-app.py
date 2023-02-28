@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""0x02.i18n"""
+"""
+Flask app
+"""
 from flask import Flask, render_template
 from flask_babel import Babel
 
