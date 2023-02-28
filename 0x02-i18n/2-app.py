@@ -23,7 +23,6 @@ class Config(object):
 app.config.from_object(Config)
 
 
-@babel.localeselector
 def get_locale():
     """
     The home/index page
@@ -33,7 +32,8 @@ def get_locale():
 
 babel.init_app(app, locale_selector=get_locale)
 
-app.route("/",strict_slashes=False)
+
+@app.route("/", strict_slashes=False)
 def index():
     """Hello World !!!
     """
