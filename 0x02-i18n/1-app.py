@@ -2,10 +2,9 @@
 """0x02.i18n"""
 from flask import Flask, render_template
 from flask_babel import Babel
-import babel
 
 
-class Config:
+class Config(object):
     """
     Config class
     """
