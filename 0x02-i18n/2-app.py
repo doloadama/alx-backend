@@ -2,6 +2,7 @@
 """
 Get locale from request
 """
+import babel
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
