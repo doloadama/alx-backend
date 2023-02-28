@@ -30,6 +30,11 @@ def get_locale():
 
 app.route("/",strict_slashes=False)
 def index():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     return render_template("2-index.html")
 
 
