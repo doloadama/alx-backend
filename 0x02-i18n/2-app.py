@@ -4,7 +4,10 @@ Get locale from request
 """
 from flask import Flask, render_template, request
 from flask_babel import Babel
-import babel
+
+
+app = Flask(__name__)
+babel = Babel(app)
 
 
 class Config(object):
@@ -16,9 +19,8 @@ class Config(object):
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-app = Flask(__name__)
 app.config.from_object(Config)
-babel = Babel(app)
+
 
 @babel.localeselector
 def get_locale():
