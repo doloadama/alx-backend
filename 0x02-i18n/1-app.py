@@ -5,12 +5,7 @@ from flask_babel import Babel
 
 
 app = Flask(__name__)
-@app.route("/")
-def index():
-    """
-    HANDLES / ROUTE
-    """
-    return render_template("1-index.html")
+Babel = Babel(app)
 
 
 class Config:
@@ -22,5 +17,15 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
+app.config.from_object(Config)
+
+@app.route("/")
+def index():
+    """
+    HANDLES / ROUTE
+    """
+    return render_template("1-index.html")
+
+
 if __name__ == '__main__':
-    app.run(port="5000", host="0.0.0.0", debug=True)
+    app.run(debug=True)
