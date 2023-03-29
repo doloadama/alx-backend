@@ -11,16 +11,13 @@ client.on('error', (err) => {
 });
 
 function setNewSchool(schoolName, value) {
-    client.set(schoolName, value, (err, reply) => {
-        if (err) throw err;
-        console.log(`Value ${value} has been set for key ${schoolName}`);
+    client.SET(schoolName, value, print => {
     });
 }
 
 function displaySchoolValue(schoolName) {
-    client.get(schoolName, (err, reply) => {
-        if (err) throw err;
-        console.log(`Value  has been set for key ${reply}`);
+    client.GET(schoolName, (_err, reply) => {
+        console.log(reply);
     });
 }
 
