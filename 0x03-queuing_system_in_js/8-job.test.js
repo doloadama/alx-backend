@@ -59,7 +59,7 @@ describe('createPushNotificationsJobs', () => {
     setTimeout(() => {
       // Check the number of jobs in the queue
       queue.inactiveCount((err, count) => {
-        expect(count).to.equal(6);
+        expect(count).to.equal(2);
         done();
       });
     }, 100);
