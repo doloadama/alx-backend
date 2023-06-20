@@ -10,12 +10,22 @@ describe('createPushNotificationsJobs', () => {
     queue = kue.createQueue();
   });
 
-  afterEach(() => {
-    // Remove jobs from the queue and shutdown the queue connection
-    queue.processing.forEach((job) => {
-      job.remove();
+  afterEach((done) => {
+    // Remove completed jobs from the queue and shutdown the queue connection
+    queue.completeCount((err, count) => {
+      if (count > 0) {
+        queue
+          .complete()
+          .on('complete', () => {
+            if (--count === 0) {
+              queue.shutdown(5000, done);
+            }
+          })
+          .removeOnComplete(true);
+      } else {
+        queue.shutdown(5000, done);
+      }
     });
-    queue.shutdown(5000);
   });
 
   it('should display an error message if jobs is not an array', () => {
@@ -24,7 +34,7 @@ describe('createPushNotificationsJobs', () => {
     }).to.throw('Jobs is not an array');
   });
 
-  it('should create two new jobs to the queue', (done) => {
+  it('should create two new jobs in the queue', (done) => {
     const jobs = [
       {
         phoneNumber: '4153518780',
