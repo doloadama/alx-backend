@@ -23,7 +23,7 @@ function setNewSchool(schoolName, value) {
 async function displaySchoolValue(schoolName) {
     try {
         const value = await getAsync(schoolName);
-        console.log(`Value for key ${schoolName}: ${value}`);
+        console.log(`${value}`);
     } catch (error) {
         console.log(`Error retrieving value for key ${schoolName}: ${schoolName}: ${error.message}`);
     };
