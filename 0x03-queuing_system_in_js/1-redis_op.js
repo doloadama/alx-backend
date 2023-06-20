@@ -23,7 +23,7 @@ function displaySchoolValue(schoolName) {
             console.log(`Error retrieving value for
                          key ${schoolName}: ${error.message}`);
         } else {
-            console.log(`Value for key ${schoolName}: ${value}`);
+            console.log(`${value}`);
         }
     });
 }
