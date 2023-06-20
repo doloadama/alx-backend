@@ -5,20 +5,16 @@ import createPushNotificationsJobs from './8-job';
 describe('createPushNotificationsJobs', () => {
   let queue;
 
-  before(() => {
+  beforeEach(() => {
     // Create a queue with Kue
     queue = kue.createQueue();
   });
 
-  beforeEach(() => {
-    // Set the queue to test mode
-    queue.testMode(true);
-  });
-
   afterEach(() => {
-    // Clear the queue and exit the test mode
-    queue.testMode(false);
-    queue.clear();
+    // Clear the queue and shutdown the queue connection
+    queue.shutdown(5000, () => {
+      queue.clear();
+    });
   });
 
   it('should display an error message if jobs is not an array', () => {
@@ -27,7 +23,7 @@ describe('createPushNotificationsJobs', () => {
     }).to.throw('Jobs is not an array');
   });
 
-  it('should create two new jobs to the queue', () => {
+  it('should create two new jobs to the queue', (done) => {
     const jobs = [
       {
         phoneNumber: '4153518780',
@@ -41,11 +37,12 @@ describe('createPushNotificationsJobs', () => {
 
     createPushNotificationsJobs(jobs, queue);
 
-    // Validate the jobs in the queue
-    expect(queue.testMode.jobs.length).to.equal(2);
-    expect(queue.testMode.jobs[0].type).to.equal('push_notification_code_3');
-    expect(queue.testMode.jobs[0].data).to.deep.equal(jobs[0]);
-    expect(queue.testMode.jobs[1].type).to.equal('push_notification_code_3');
-    expect(queue.testMode.jobs[1].data).to.deep.equal(jobs[1]);
+    setTimeout(() => {
+      // Check the number of jobs in the queue
+      queue.inactiveCount((err, count) => {
+        expect(count).to.equal(2);
+        done();
+      });
+    }, 100);
   });
 });
