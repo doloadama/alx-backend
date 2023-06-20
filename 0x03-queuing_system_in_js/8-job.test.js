@@ -11,10 +11,11 @@ describe('createPushNotificationsJobs', () => {
   });
 
   afterEach(() => {
-    // Clear the queue and shutdown the queue connection
-    queue.shutdown(5000, () => {
-      queue.clear();
+    // Remove jobs from the queue and shutdown the queue connection
+    queue.processing.forEach((job) => {
+      job.remove();
     });
+    queue.shutdown(5000);
   });
 
   it('should display an error message if jobs is not an array', () => {
