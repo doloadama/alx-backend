@@ -1,7 +1,6 @@
 import kue from 'kue';
 
-const blacklistedNumbers = ['4153518780', '4153518781', '4153518743', '4153538781', '4153118782', '4153718781',
-'4159518782', '4158718781', '4153818782', '4154318781',  '4151218782'];
+const blacklistedNumbers = ['4153518780', '4153518781'];
 
 function sendNotification(phoneNumber, message, job, done) {
   job.progress(0, 100);
