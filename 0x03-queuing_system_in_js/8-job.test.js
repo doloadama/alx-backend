@@ -12,18 +12,26 @@ describe('createPushNotificationsJobs', () => {
 
   afterEach((done) => {
     // Remove completed jobs from the queue and shutdown the queue connection
-    queue.completeCount((err, count) => {
-      if (count > 0) {
-        queue
-          .complete()
-          .on('complete', () => {
-            if (--count === 0) {
+    queue.inactive((err, jobs) => {
+      if (err) {
+        done(err);
+      } else {
+        const completedJobs = jobs.filter((job) => job._state === 'complete');
+        const total = completedJobs.length;
+        let count = 0;
+
+        completedJobs.forEach((job) => {
+          job.remove(() => {
+            count++;
+            if (count === total) {
               queue.shutdown(5000, done);
             }
-          })
-          .removeOnComplete(true);
-      } else {
-        queue.shutdown(5000, done);
+          });
+        });
+
+        if (total === 0) {
+          queue.shutdown(5000, done);
+        }
       }
     });
   });
