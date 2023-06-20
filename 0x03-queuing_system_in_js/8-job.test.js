@@ -12,7 +12,7 @@ describe('createPushNotificationsJobs', () => {
 
   afterEach(() => {
     // Remove jobs from the queue and shutdown the queue connection
-    queue.processing.afterEach((job) => {
+    queue.processing.forEach((job) => {
       job.remove();
     });
     queue.shutdown(5000);
